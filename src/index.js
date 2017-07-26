@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Provider, inject, observer } from 'mobx-react'
 
 import DevTools from 'mobx-react-devtools';
+import * as SUI from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 import globalStore from './stores'
 
@@ -18,10 +20,11 @@ class App extends Component {
         const {store} = this.props;
         console.log(store);
         return (
-            <div className="App">
-ssss
+
+              <SUI.Container>
+                  <SUI.Button>dd</SUI.Button>
                 <DevTools />
-            </div>
+              </SUI.Container>
         );
     }
 }
