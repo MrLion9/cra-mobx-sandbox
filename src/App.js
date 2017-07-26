@@ -5,6 +5,7 @@ import DevTools from 'mobx-react-devtools';
 import logo from './logo.svg';
 import './App.css';
 
+@observer
 class App extends Component {
   render() {
       const {counter} = this.props;
@@ -32,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default observer(App);
+export default App;
