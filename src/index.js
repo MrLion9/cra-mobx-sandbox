@@ -1,16 +1,23 @@
 import ReactDOM from 'react-dom';
-import React, { Component } from 'react';
-import { Provider, inject, observer } from 'mobx-react'
+import React, {Component} from 'react';
+import {inject, observer, Provider} from 'mobx-react'
+import {Route, Router} from 'react-router'
+import {syncHistoryWithStore} from 'mobx-react-router';
+import createHashHistory from 'history/createHashHistory';
+
+import {NavLink} from 'react-router-dom';
 
 import DevTools from 'mobx-react-devtools';
 import * as SUI from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
+import registerServiceWorker from './registerServiceWorker';
+
 import globalStore from './stores'
 
 import './index.css';
-
-import registerServiceWorker from './registerServiceWorker';
+import About from './screens/About';
+import Home from './screens/Home';
 
 
 @inject('store')
@@ -18,24 +25,44 @@ import registerServiceWorker from './registerServiceWorker';
 class App extends Component {
     render() {
         const {store} = this.props;
-        console.log(store);
-        return (
 
-              <SUI.Container>
-                  <SUI.Button>dd</SUI.Button>
-                <DevTools />
-              </SUI.Container>
+        let hashHistory, history, stores;
+        stores = store.getStores();
+        hashHistory = createHashHistory();
+        history = syncHistoryWithStore(hashHistory, stores.router);
+
+        return (
+            <Router history={history}>
+                <Provider {...stores}>
+
+                    <SUI.Container>
+                        <SUI.Menu>
+                            <SUI.Menu.Item as={NavLink} to="/">
+                                Home
+                            </SUI.Menu.Item>
+                            <SUI.Menu.Item as={NavLink} to="/about">
+                                About
+                            </SUI.Menu.Item>
+                            {/*<SUI.Menu.Item as={NavLink} to="/editor" active={false}>*/}
+                            {/*Editor*/}
+                            {/*</SUI.Menu.Item>*/}
+                        </SUI.Menu>
+
+                        <Route path="/" exact component={Home}/>
+                        <Route path="/about" exact component={About}/>
+                        {/*<Route path="/editor" exact component={Editor} />*/}
+                        <DevTools/>
+                    </SUI.Container>
+                </Provider>
+            </Router>
         );
     }
 }
 
-// const wrappedApp = () =>
-
-// export default wrappedApp
 
 ReactDOM.render(
     <Provider store={globalStore}>
-        <App />
+        <App/>
     </Provider>
     , document.getElementById('root'));
 registerServiceWorker();

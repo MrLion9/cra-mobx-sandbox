@@ -5,7 +5,7 @@ import { RouterStore } from 'mobx-react-router'
 class AppStore {
 
     constructor() {
-        this.router= new RouterStore()
+        this.router= new RouterStore();
     }
 
     getStores = () => ({
@@ -14,6 +14,6 @@ class AppStore {
 
 }
 
-const appStore = new AppStore()
+const appStore = new AppStore();
 
 export default appStore
