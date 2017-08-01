@@ -18,6 +18,7 @@ import globalStore from './stores'
 import './index.css';
 import About from './screens/About';
 import Home from './screens/Home';
+import ProgramInterface from './screens/ProgramInterface';
 
 
 @inject('store')
@@ -40,6 +41,9 @@ class App extends Component {
                             <SUI.Menu.Item as={NavLink} to="/">
                                 Home
                             </SUI.Menu.Item>
+                            <SUI.Menu.Item as={NavLink} to="/interface">
+                                Interfaces
+                            </SUI.Menu.Item>
                             <SUI.Menu.Item as={NavLink} to="/about">
                                 About
                             </SUI.Menu.Item>
@@ -49,7 +53,8 @@ class App extends Component {
                         </SUI.Menu>
 
                         <Route path="/" exact component={Home}/>
-                        <Route path="/about" exact component={About}/>
+                        <Route path="/interface" component={ProgramInterface}/>
+                        <Route path="/about" component={About}/>
                         {/*<Route path="/editor" exact component={Editor} />*/}
                         <DevTools/>
                     </SUI.Container>
