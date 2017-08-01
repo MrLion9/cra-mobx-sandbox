@@ -4,8 +4,6 @@ import {PropTypes} from 'prop-types'
 import {inject, observer} from 'mobx-react'
 import ProgramInterfaceList from '../components/ProgramInterface'
 
-const {shape, object} = PropTypes;
-
 const ProgramInterface = ({
                               interfaces: {items}
                           }) =>
@@ -13,9 +11,6 @@ const ProgramInterface = ({
         items={items}
     />;
 
-ProgramInterface.propTypes = {
-    interfaces: shape({items: object}),
-};
 
 const mapStores = ({interfaces}) => ({interfaces});
 

@@ -40,9 +40,10 @@ class ProgramInterfaceList extends Component {
     };
 
     render() {
+        const {items} = this.props;
         return (
             <List divided relaxed>
-                {this.props.items && this.props.items.data && this.props.items.data.results ? this.props.items.data.results.map(({id, title, creation_time, modification_time}) =>
+                {items ? items.map(({id, title, creation_time, modification_time}) =>
                     <ProgramInterfaceListItem
                         {...{id, title, creation_time, modification_time}}
                     />
