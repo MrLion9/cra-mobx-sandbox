@@ -22,6 +22,7 @@ class ApiRequest {
 
 
     getProgramInterfaceList = () => this.axios.get('business-logic/rest/program-interface');
+    getProgramList = (id) => this.axios.get(`business-logic/rest/program?program_interface=${id}`);
 
 }
 

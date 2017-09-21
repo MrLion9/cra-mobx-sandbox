@@ -1,17 +1,28 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
 
 import {inject, observer} from 'mobx-react'
 import ProgramInterfaceList from '../components/ProgramInterface'
 
-const ProgramInterface = ({
-                              interfaces: {items}
-                          }) =>
-    <ProgramInterfaceList
-        items={items}
-    />;
+import * as actions from '../actions'
 
+@inject('router', 'interfaces')
+@observer
+class ProgramInterface extends Component {
+  onItemClick (interfaceId) {
+    const { push } = this.props.router;
 
-const mapStores = ({interfaces}) => ({interfaces});
+    actions.setProgramInterface(interfaceId);
+    push(`/interface/${interfaceId}`);
+  }
 
-export default inject(mapStores)(observer(ProgramInterface))
+  render() {
+    const { interfaces } = this.props;
+
+    return (
+      <ProgramInterfaceList onItemClick={this.onItemClick.bind(this)} {...interfaces}/>
+    );
+  }
+}
+
+export default ProgramInterface;

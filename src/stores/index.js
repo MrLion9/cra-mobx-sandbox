@@ -8,8 +8,8 @@ class AppStore {
     constructor() {
         this.router = new RouterStore();
         this.interfaces = new ProgramInterface(this.getStores);
-        Promise.all([]
-        )
+
+        Promise.all([])
             .then(async () => {
                 try {
                     await this.interfaces.getProgramInterfaceList()

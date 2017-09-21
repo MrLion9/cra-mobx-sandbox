@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import {inject, observer, Provider} from 'mobx-react'
 import {Route, Router} from 'react-router'
 import {syncHistoryWithStore} from 'mobx-react-router';
-import createHashHistory from 'history/createHashHistory';
+// import createHashHistory from 'history/createHashHistory';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import {NavLink} from 'react-router-dom';
 
@@ -19,7 +20,9 @@ import './index.css';
 import About from './screens/About';
 import Home from './screens/Home';
 import ProgramInterface from './screens/ProgramInterface';
+import Programs from './screens/Programs';
 
+const browserHistory = createBrowserHistory();
 
 @inject('store')
 @observer
@@ -27,10 +30,9 @@ class App extends Component {
     render() {
         const {store} = this.props;
 
-        let hashHistory, history, stores;
-        stores = store.getStores();
-        hashHistory = createHashHistory();
-        history = syncHistoryWithStore(hashHistory, stores.router);
+        let stores = store.getStores();
+        // let hashHistory = createHashHistory();
+        let history = syncHistoryWithStore(browserHistory, stores.router);
 
         return (
             <Router history={history}>
@@ -54,6 +56,7 @@ class App extends Component {
 
                         <Route path="/" exact component={Home}/>
                         <Route path="/interface" component={ProgramInterface}/>
+                        <Route path={`/interface/:interfaceId`} component={Programs}/>
                         <Route path="/about" component={About}/>
                         {/*<Route path="/editor" exact component={Editor} />*/}
                         <DevTools/>
