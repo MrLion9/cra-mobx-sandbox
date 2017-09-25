@@ -19,8 +19,7 @@ import globalStore from './stores'
 import './index.css';
 import About from './screens/About';
 import Home from './screens/Home';
-import ProgramInterface from './screens/ProgramInterface';
-import Programs from './screens/Programs';
+import VisualEditor from './screens/VisualEditor';
 
 const browserHistory = createBrowserHistory();
 
@@ -44,7 +43,7 @@ class App extends Component {
                                 Home
                             </SUI.Menu.Item>
                             <SUI.Menu.Item as={NavLink} to="/interface">
-                                Interfaces
+                                Visual Editor
                             </SUI.Menu.Item>
                             <SUI.Menu.Item as={NavLink} to="/about">
                                 About
@@ -55,8 +54,8 @@ class App extends Component {
                         </SUI.Menu>
 
                         <Route path="/" exact component={Home}/>
-                        <Route path="/interface" component={ProgramInterface}/>
-                        <Route path={`/interface/:interfaceId`} component={Programs}/>
+                        <Route path="/interface" component={VisualEditor}/>
+                        {/*<Route path={`/interface/:interfaceId`} component={Programs}/>*/}
                         <Route path="/about" component={About}/>
                         {/*<Route path="/editor" exact component={Editor} />*/}
                         <DevTools/>

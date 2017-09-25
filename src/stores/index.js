@@ -1,6 +1,7 @@
 import {RouterStore} from 'mobx-react-router'
 
 import ProgramInterface from './ProgramInterface'
+import Program from './Program'
 
 
 class AppStore {
@@ -8,6 +9,7 @@ class AppStore {
     constructor() {
         this.router = new RouterStore();
         this.interfaces = new ProgramInterface(this.getStores);
+        this.programs = new Program(this.getStores);
 
         Promise.all([])
             .then(async () => {
@@ -22,7 +24,8 @@ class AppStore {
 
     getStores = () => ({
         router: this.router,
-        interfaces: this.interfaces
+        interfaces: this.interfaces,
+        programs: this.programs,
     })
 
 }

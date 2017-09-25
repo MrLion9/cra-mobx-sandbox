@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import { PropTypes} from 'prop-types'
-import { observer } from 'mobx-react'
 
 import { List } from 'semantic-ui-react'
 
 const {string, date, number} = PropTypes;
 
-@observer
-class ProgramInterfaceListItem extends Component {
+class ListItem extends Component {
 
     static propTypes = {
         id: number,
@@ -27,15 +25,34 @@ class ProgramInterfaceListItem extends Component {
                       onClick={onItemClick}>
                       {title}
                     </List.Header>
-                    <List.Description as='a'>Created {creation_time}  Modified {modification_time}</List.Description>
+                    <List.Description as='a'>
+                        Created {creation_time}  Modified {modification_time}
+                    </List.Description>
                 </List.Content>
             </List.Item>
         );
     }
 }
 
-@observer
-class ProgramInterfaceList extends Component {
+class EmptyItem extends Component {
+    render () {
+        return (
+            <List.Item>
+                <List.Icon verticalAlign='middle' />
+                <List.Content>
+                    <List.Header>
+                        Empty list
+                    </List.Header>
+                    <List.Description as='a'>
+
+                    </List.Description>
+                </List.Content>
+            </List.Item>
+        );
+    }
+}
+
+class VeList extends Component {
 
     static propTypes = {
         items: PropTypes.object
@@ -44,10 +61,18 @@ class ProgramInterfaceList extends Component {
     render() {
         const {items, onItemClick} = this.props;
 
+        if (!items.length) {
+            return (
+                    <List divided relaxed>
+                        <EmptyItem />
+                    </List>
+                );
+        }
+
         return (
             <List divided relaxed>
                 {items ? items.map(({id, title, creation_time, modification_time}, key) =>
-                    <ProgramInterfaceListItem
+                    <ListItem
                       key={key}
                       onItemClick={onItemClick.bind(null, id)}
                       {...{id, title, creation_time, modification_time}} />
@@ -57,4 +82,4 @@ class ProgramInterfaceList extends Component {
     }
 }
 
-export default ProgramInterfaceList;
+export default VeList;
